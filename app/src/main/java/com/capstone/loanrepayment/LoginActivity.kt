@@ -24,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
 
             AuthService.authenticateUser(username, password) { success, token, errorMessage ->
                 if (success) {
-                    // Store the token if necessary
+                    // Store the token if SharedPreferences
                     val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
                     val editor = sharedPreferences.edit()
                     editor.putString("auth_token", token)
