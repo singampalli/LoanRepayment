@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.loanrepayment.databinding.ActivityLoginBinding
 import com.capstone.loanrepayment.services.AuthService
+import com.capstone.loanrepayment.util.TokenManager
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -25,11 +26,9 @@ class LoginActivity : AppCompatActivity() {
             AuthService.authenticateUser(username, password) { success, token, errorMessage ->
                 if (success) {
                     // Store the token if SharedPreferences
-                    val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-                    val editor = sharedPreferences.edit()
-                    editor.putString("auth_token", token)
-                    editor.apply()
-
+                    if (token != null) {
+                        TokenManager.saveToken(this, token)
+                    };
                     // Navigate to MainActivity
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
@@ -38,8 +37,6 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
-
-
         binding.forgotPasswordTextView.setOnClickListener {
             startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
