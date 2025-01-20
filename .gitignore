@@ -21,5 +21,6 @@ Thumbs.db
 
 # Ignore IDE specific files
 .vscode/
+.gradle/
 .idea/
 *.iml
