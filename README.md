@@ -20,16 +20,9 @@ To install and run this project, follow these steps:
     ```sh
     cd LoanRepayment
     ```
-3. Install the required dependencies:
-    ```sh
-    npm install
-    ```
+3. Open in android studio (ladybug recommended)
+    
 
-## Usage
-To start the application, run:
-```sh
-npm start
-```
 Follow the on-screen instructions to input the necessary data and generate the loan repayment assessment report.
 
 ## Contributing
