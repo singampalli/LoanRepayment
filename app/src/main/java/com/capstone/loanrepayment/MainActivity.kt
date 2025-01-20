@@ -24,7 +24,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+//        val username=intent.getStringExtra("username")
+        val username="username1"
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentSpace, LoanFragment(username!!))
+            .commit()
     }
+
 
     override fun onResume() {
         super.onResume()

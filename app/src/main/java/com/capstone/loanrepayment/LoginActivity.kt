@@ -30,7 +30,8 @@ class LoginActivity : AppCompatActivity() {
                         TokenManager.saveToken(this, token)
                     };
                     // Navigate to MainActivity
-                    startActivity(Intent(this, MainActivity::class.java))
+                    val intent=Intent(this, MainActivity::class.java)
+                    startActivity(intent.putExtra("username",username))
                     finish()
                 } else {
                     Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
