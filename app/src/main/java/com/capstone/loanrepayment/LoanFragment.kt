@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.loanrepayment.api.AuthServiceApi
+import com.capstone.loanrepayment.api.LoanByIdRequest
+import com.capstone.loanrepayment.api.LoanRequest
+import com.capstone.loanrepayment.api.LoginRequest
 import com.capstone.loanrepayment.api.RetrofitClient
 import com.capstone.loanrepayment.models.LoanDetails
 import com.capstone.loanrepayment.models.LoanType
@@ -32,13 +35,14 @@ class LoanFragment(val username:String):Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         val users = RetrofitClient.instance.create(AuthServiceApi::class.java)
-        users.getLoans(username,"active").enqueue(object : Callback<List<LoanType>>{
+//        login(LoginRequest(username, password))object : Callback<LoginResponse> {
+        users.getLoans(LoanRequest(username,"active") ).enqueue(object : Callback<LoanType> {
             override fun onResponse(
-                call: Call<List<LoanType>>,
-                response: Response<List<LoanType>>
+                call: Call<LoanType>,
+                response: Response<LoanType>
             ) {
-                val user=response.body()?:return
-                val adapter=UserAdapter(user){
+                val loans=response.body()?:return
+                val adapter=UserAdapter(loans.data){
                         user ->
                     val userDetailFragment=DetailFragment.newInstance(user.id)
                     parentFragmentManager.beginTransaction()
@@ -47,14 +51,16 @@ class LoanFragment(val username:String):Fragment() {
                         .commit()
                 }
                 recyclerView.adapter=adapter
+
             }
 
-            override fun onFailure(call: Call<List<LoanType>>, t: Throwable) {
+            override fun onFailure(call: Call<LoanType>, t: Throwable) {
                 // Log the error message
-                 Log.e("LoanTypeFetchError", "Failed to fetch loan types", t)
+                 Log.e("LoanTypeFetchError", "Failed to fetch loan types "+t.message, t)
                 Toast.makeText(context,"Fail to fetch",Toast.LENGTH_SHORT).show()
             }
         })
+
 
         return view
    }

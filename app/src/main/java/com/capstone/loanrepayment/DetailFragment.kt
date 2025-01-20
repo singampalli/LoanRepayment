@@ -1,12 +1,15 @@
 package com.capstone.loanrepayment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.capstone.loanrepayment.api.AuthServiceApi
+import com.capstone.loanrepayment.api.LoanByIdRequest
 import com.capstone.loanrepayment.api.RetrofitClient
 import com.capstone.loanrepayment.models.LoanDetails
 import com.capstone.loanrepayment.models.LoanType
@@ -50,19 +53,22 @@ class DetailFragment:Fragment() {
 
     companion object {
         fun newInstance(id:Int):DetailFragment{
+
+            // val users = RetrofitClient.instance.create(AuthServiceApi::class.java)
             val userDetails = RetrofitClient.instance.create(AuthServiceApi::class.java)
             lateinit var data :LoanDetails
-            val details=userDetails.getDetails(id)
-            details.enqueue(object : Callback<List<LoanDetails>>{
+// users.getLoans(LoanRequest(username,"active") ).enqueue(object : Callback<LoanType> {
+            userDetails.getDetails(LoanByIdRequest(id)).enqueue(object : Callback<List<LoanDetails>>{
                 override fun onResponse(
                     call: Call<List<LoanDetails>>,
                     response: Response<List<LoanDetails>>
                 ) {
-                    data= response?.body()?.get(0)!!
+                    data= (response?.body()?.get(0) ?: intArrayOf(0)) as LoanDetails
                 }
 
                 override fun onFailure(call: Call<List<LoanDetails>>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    Log.e("LoanDetailsFailure", "Failed to execute request: ${t.message}")
+                    t.printStackTrace()
                 }
 
             })

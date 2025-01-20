@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.loanrepayment.R
+import com.capstone.loanrepayment.models.Data
 import com.capstone.loanrepayment.models.LoanDetails
 import com.capstone.loanrepayment.models.LoanType
 import com.capstone.loanrepayment.models.User
 
-class UserAdapter(val users:List<LoanType>,val onItemClick:(LoanType)->Unit):RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class UserAdapter(val users:List<Data>,val onItemClick:(Data)->Unit):RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     class UserViewHolder(view:View): RecyclerView.ViewHolder(view){
         val name:TextView=view.findViewById(R.id.loanType)
