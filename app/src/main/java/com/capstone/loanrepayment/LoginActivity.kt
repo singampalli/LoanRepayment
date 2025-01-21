@@ -28,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
                     // Store the token if SharedPreferences
                     if (token != null) {
                         TokenManager.saveToken(this, token)
+                        TokenManager.saveUserName(this,username)
                     };
                     // Navigate to MainActivity
                     val intent=Intent(this, MainActivity::class.java)
