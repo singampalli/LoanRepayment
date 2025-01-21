@@ -9,6 +9,8 @@ import com.capstone.loanrepayment.api.ForgotPasswordRequest
 import com.capstone.loanrepayment.api.ForgotPasswordResponse
 import com.capstone.loanrepayment.api.LoginRequest
 import com.capstone.loanrepayment.api.LoginResponse
+import com.capstone.loanrepayment.api.ResetPasswordRequest
+import com.capstone.loanrepayment.api.ResetPasswordResponse
 import com.capstone.loanrepayment.api.RetrofitClient
 import com.capstone.loanrepayment.models.User
 
@@ -33,7 +35,7 @@ object AuthService {
         })
     }
     //authenticateUser(username: String, callback: (Boolean, String?, String?) -> Unit){
-    fun resetPassword(email: String,callback: (Boolean, String?, String?) -> Unit){
+    fun forgotPassword(email: String,callback: (Boolean, String?, String?) -> Unit){
         // Add password reset logic here
         val call = api.forgotPassword(ForgotPasswordRequest(email));
         call.enqueue(object : Callback<ForgotPasswordResponse>{
@@ -41,13 +43,27 @@ object AuthService {
                 if (response.isSuccessful && response.body() != null) {
                     val forgotPasswordResponse = response.body()!!
                     callback(true, forgotPasswordResponse.resetCode, null)
+                }else {
+                    callback(false, null, R.string.login_error_message.toString())
                 }
-//                else {
-//                    Toast.makeText(this@ForgotPasswordActivity, "Failed to send reset email!", Toast.LENGTH_SHORT).show()
-//                }
             }
-
             override fun onFailure(call: Call<ForgotPasswordResponse>, t: Throwable) {
+                callback(false, null, "Network error: ${t.message}")
+            }
+        })
+    }
+    fun resetPassword(userEmail: String, password: String,callback: (Boolean, String?, String?) -> Unit){
+        val call = api.resetPassword(ResetPasswordRequest(userEmail, password))
+        call.enqueue(object : Callback<ResetPasswordResponse> {
+            override fun onResponse(call: Call<ResetPasswordResponse>, response: Response<ResetPasswordResponse>) {
+                if (response.isSuccessful && response.body() != null) {
+                    val resetPasswordResponse = response.body()!!
+                    callback(resetPasswordResponse.status, resetPasswordResponse.message, null)
+                } else {
+                    callback(false, null, R.string.login_error_message.toString())
+                }
+            }
+            override fun onFailure(call: Call<ResetPasswordResponse>, t: Throwable) {
                 callback(false, null, "Network error: ${t.message}")
             }
         })
