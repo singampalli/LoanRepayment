@@ -25,7 +25,8 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 //        val username=intent.getStringExtra("username")
-        val username="username1"
+        //saved username on success ful login
+        val username=TokenManager.getUserName(this);
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentSpace, LoanFragment(username!!))
             .commit()

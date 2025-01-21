@@ -12,4 +12,5 @@
     <string name="login_error_message">Invalid Login credentials</string>
     <string name="enter_code">Enter code</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="loan_type">Loan type : </string>
 </resources>

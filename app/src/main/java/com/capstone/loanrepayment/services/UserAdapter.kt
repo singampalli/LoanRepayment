@@ -15,6 +15,7 @@ class UserAdapter(val users:List<Data>,val onItemClick:(Data)->Unit):RecyclerVie
 
     class UserViewHolder(view:View): RecyclerView.ViewHolder(view){
         val name:TextView=view.findViewById(R.id.loanType)
+        val loanNumber:TextView=view.findViewById(R.id.loanNumber)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -29,6 +30,7 @@ class UserAdapter(val users:List<Data>,val onItemClick:(Data)->Unit):RecyclerVie
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user=users[position]
+        holder.loanNumber.text=user.loanAccountNumber
         holder.name.text=user.loanType
 //        holder.email.text=user.email
         holder.itemView.setOnClickListener{
