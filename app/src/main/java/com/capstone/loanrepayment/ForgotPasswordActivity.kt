@@ -1,9 +1,11 @@
 package com.capstone.loanrepayment
 import android.content.Intent
+import android.media.session.MediaSession.Token
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.capstone.loanrepayment.databinding.ActivityForgotPasswordBinding
 import com.capstone.loanrepayment.services.AuthService
 import com.capstone.loanrepayment.util.TokenManager
@@ -41,31 +43,35 @@ class ForgotPasswordActivity : AppCompatActivity() {
         emailInput= findViewById(R.id.emailInput)
         emailEditText = findViewById(R.id.emailEditText)
         resetPasswordButton = findViewById(R.id.resetPasswordButton)
+        codeEditText = findViewById(R.id.codeEditText);
 
         resetPasswordButton.setOnClickListener {
             val email = emailEditText.text.toString()
+            val resetCodeInput = codeEditText.text.toString();
 
-            if (email.isEmpty()) {
-                val resetCodeInput = codeEditText.text.toString()
-                emailEditText.error = "Email is required"
+            if (!resetCodeInput.isEmpty() && !emailEditText.isVisible) {
+                if(resetCodeInput == TokenManager.getResetCode(this)){
+                    Toast.makeText(this,"Reset to new password",Toast.LENGTH_LONG).show()
+                    val intent=Intent(this, ResetPasswordActivity::class.java)
+                    startActivity(intent.putExtra("email",email))
+                    finish()
+                }
+                else
+                    Toast.makeText(this,"Code is invalied",Toast.LENGTH_SHORT).show()
+
             } else {
-            //    AuthService.authenticateUser(username, password) { success, token, errorMessage ->
-
-                val call = AuthService.resetPassword(email){success, resetCode, errorMessage ->
+                val call = AuthService.forgotPassword(email){success, resetCode, errorMessage ->
                     if (success) {
                         // Store the token if SharedPreferences
                         if (resetCode != null) {
                             TokenManager.saveResetCode(this, resetCode)
-                            Toast.makeText(this, "every thing is fine1", Toast.LENGTH_SHORT).show()
                             codeInput = findViewById(R.id.codeInput)
                             codeInput.visibility = View.VISIBLE
-                            emailEditText.setText("")
                             emailEditText.visibility = View.GONE
-                            Toast.makeText(this, "every thing is fine2", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Code sent to your email successfully", Toast.LENGTH_SHORT).show()
                         };
-
                     } else {
-                        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "reset password call failed", Toast.LENGTH_SHORT).show()
                     }
 
                 }

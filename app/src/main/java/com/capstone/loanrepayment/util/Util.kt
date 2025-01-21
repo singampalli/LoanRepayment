@@ -6,12 +6,18 @@ import android.content.SharedPreferences
 object TokenManager {
     private const val PREFS_NAME = "app_prefs"
     private const val KEY_AUTH_TOKEN = "auth_token"
-    private const val KEY_RESET_TOKEN = "auth_token"
+    private const val KEY_USER_NAME = "user_name"
+    private const val KEY_RESET_TOKEN = "reset_token"
 
     private fun getSharedPreferences(context: Context): SharedPreferences {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     }
 
+    fun saveUserName(context: Context, token: String) {
+        val editor = getSharedPreferences(context).edit()
+        editor.putString(KEY_USER_NAME, token)
+        editor.apply()
+    }
     fun saveToken(context: Context, token: String) {
         val editor = getSharedPreferences(context).edit()
         editor.putString(KEY_AUTH_TOKEN, token)
@@ -26,8 +32,12 @@ object TokenManager {
     fun getToken(context: Context): String? {
         return getSharedPreferences(context).getString(KEY_AUTH_TOKEN, null)
     }
+
     fun getResetCode(context: Context): String? {
         return getSharedPreferences(context).getString(KEY_RESET_TOKEN, null)
+    }
+    fun getUserName(context: Context): String? {
+        return getSharedPreferences(context).getString(KEY_USER_NAME, null)
     }
 
     fun clearToken(context: Context) {
