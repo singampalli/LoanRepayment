@@ -12,12 +12,17 @@ data class LoginRequest(val username: String, val password: String)
 data class LoanRequest(val username: String, val status: String)
 data class LoanByIdRequest(val id: Int)
 data class LoginResponse( val token: String)
+data class ForgotPasswordRequest( val email: String)
+data class ForgotPasswordResponse( val resetCode: String)
 
 
 
 interface AuthServiceApi {
     @POST("/login")
     fun login(@Body request: LoginRequest): Call<LoginResponse>
+
+    @POST("/forgotPassword")
+    fun forgotPassword(@Body request: ForgotPasswordRequest): Call<ForgotPasswordResponse>
 
     @POST("/loans")
     fun getLoans(@Body request: LoanRequest): Call<LoanType>
