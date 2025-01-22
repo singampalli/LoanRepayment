@@ -19,6 +19,8 @@ data class ForgotPasswordResponse( val resetCode: String)
 data class ResetPasswordRequest( val userEmail: String, val password: String)
 data class ResetPasswordResponse( val status: Boolean, val message: String)
 
+data class SignUpRequest(val username: String, val email: String,  val password: String)
+data class SignUpResponse(val status:  Boolean, val message: String)
 
 
 interface AuthServiceApi {
@@ -37,6 +39,9 @@ interface AuthServiceApi {
 
     @POST("/loan")
     fun getDetails(@Body request: LoanByIdRequest):Call<List<LoanDetails>>
+
+    @POST("/register")
+    fun register(@Body request: SignUpRequest): Call<SignUpResponse>
 }
 
 
