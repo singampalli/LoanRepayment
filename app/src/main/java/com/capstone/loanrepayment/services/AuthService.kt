@@ -12,6 +12,8 @@ import com.capstone.loanrepayment.api.LoginResponse
 import com.capstone.loanrepayment.api.ResetPasswordRequest
 import com.capstone.loanrepayment.api.ResetPasswordResponse
 import com.capstone.loanrepayment.api.RetrofitClient
+import com.capstone.loanrepayment.api.SignUpRequest
+import com.capstone.loanrepayment.api.SignUpResponse
 import com.capstone.loanrepayment.models.User
 
 object AuthService {
@@ -64,6 +66,31 @@ object AuthService {
                 }
             }
             override fun onFailure(call: Call<ResetPasswordResponse>, t: Throwable) {
+                callback(false, null, "Network error: ${t.message}")
+            }
+        })
+    }
+    fun registerUser(
+        username: String,
+        email: String,
+        password: String,
+        callback: (Boolean, String?, String?) -> Unit
+    ) {
+        // Add password reset logic here
+        val call = api.register(SignUpRequest(username, email, password));
+        call.enqueue(object : Callback<SignUpResponse> {
+            override fun onResponse(
+                call: Call<SignUpResponse>,
+                response: Response<SignUpResponse>
+            ) {
+                if (response.isSuccessful && response.body() != null) {
+                    val signupResponse = response.body()!!
+                    callback(signupResponse.status, signupResponse.message, null)
+                } else {
+                    callback(false, null, R.string.login_error_message.toString())
+                }
+            }
+            override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
                 callback(false, null, "Network error: ${t.message}")
             }
         })

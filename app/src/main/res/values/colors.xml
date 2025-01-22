@@ -5,4 +5,19 @@
     <color name="colorPrimary">#3498DB</color>
     <color name="colorPrimaryDark">#2980B9</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- Primary branding colors -->
+    <color name="purple_500">#6200EE</color>
+    <color name="purple_700">#3700B3</color>
+    <color name="purple_200">#BB86FC</color>
+
+    <!-- Accent color -->
+    <color name="teal_200">#03DAC5</color>
+
+    <!-- Error color -->
+    <color name="error_red">#B00020</color>
+
+    <!-- Text colors -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
 </resources>
