@@ -7,7 +7,7 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="logout">logout</string>
-    <string name="your_loans">Your Loans</string>
+    <string name="your_loans">Loans</string>
     <string name="app_heading">Easy Loans</string>
     <string name="login_error_message">Invalid Login credentials</string>
     <string name="enter_code">Enter code</string>
