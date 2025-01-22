@@ -11,9 +11,9 @@ data class LoanDetails(
     val loanAccountNumber: String,
     val loanType:String,
     val loanAmount:String,
-    val username: String,
     val loanEMI:String,
     val loanStartDate:String,
-    val loanEndData: String,
-    val loanStatus:String
+    val loanEndDate: String,
+    val loanStatus:String,
+    val username: String
 ):Parcelable

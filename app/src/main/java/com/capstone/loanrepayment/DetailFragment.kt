@@ -1,5 +1,6 @@
 package com.capstone.loanrepayment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,11 +14,19 @@ import com.capstone.loanrepayment.api.LoanByIdRequest
 import com.capstone.loanrepayment.api.RetrofitClient
 import com.capstone.loanrepayment.models.LoanDetails
 import com.capstone.loanrepayment.models.LoanType
+import com.capstone.loanrepayment.services.LoanService
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.concurrent.CountDownLatch
 
 class DetailFragment:Fragment() {
+    @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,25 +35,26 @@ class DetailFragment:Fragment() {
         
 
         val user = arguments?.getParcelable<LoanDetails>("user")
+        Log.d("LoanDetail", "Data fetched: ${user}")
 
 
-        val tvid = view.findViewById<TextView>(R.id.tvName)
-        val tvLoanType = view.findViewById<TextView>(R.id.tvUsername)
-        val tvLoanAmount = view.findViewById<TextView>(R.id.tvEmail)
-        val tvLoanAccountNumber = view.findViewById<TextView>(R.id.tvAddress)
-        val tvLoanDuration = view.findViewById<TextView>(R.id.tvPhone)
-        val tvloanEmi = view.findViewById<TextView>(R.id.tvWebsite)
-        val tvStatus = view.findViewById<TextView>(R.id.tvCompany)
+        val id = view.findViewById<TextView>(R.id.id)
+        val LoanType = view.findViewById<TextView>(R.id.loanType)
+        val LoanAmount = view.findViewById<TextView>(R.id.loanAmount)
+        val LoanAccountNumber = view.findViewById<TextView>(R.id.loanAccountNumber)
+        val LoanDuration = view.findViewById<TextView>(R.id.loanDuration)
+        val loanEmi = view.findViewById<TextView>(R.id.loanEmi)
+        val Status = view.findViewById<TextView>(R.id.status)
 
 //        tvLoanDuration.text="${mockUser[]}"
         user?.let {
-            tvid.text = "Name: ${it.id}"
-            tvLoanType.text = "Username: ${it.loanType}"
-            tvLoanAmount.text = "Email: ${it.loanAmount}"
-            tvLoanAccountNumber.text = "Address: ${it.loanAccountNumber}"
-            tvLoanDuration.text = "Phone: ${it.username}"
-            tvloanEmi.text = "Website: ${it.loanEMI}"
-            tvStatus.text = "Company: ${it.loanStatus}"
+            id.text = "Name: ${it.id}"
+            LoanType.text = "Username: ${it.loanType}"
+            LoanAmount.text = "Email: ${it.loanAmount}"
+            LoanAccountNumber.text = "Address: ${it.loanAccountNumber}"
+            LoanDuration.text = "Phone: ${it.username}"
+            loanEmi.text = "Website: ${it.loanEMI}"
+            Status.text = "Company: ${it.loanStatus}"
         }
 
 
@@ -52,30 +62,24 @@ class DetailFragment:Fragment() {
     }
 
     companion object {
-        fun newInstance(id:Int):DetailFragment{
+        suspend fun newInstance(id: Int): DetailFragment {
+            val fragment = DetailFragment()
 
-            // val users = RetrofitClient.instance.create(AuthServiceApi::class.java)
-            val userDetails = RetrofitClient.instance.create(AuthServiceApi::class.java)
-            lateinit var data :LoanDetails
-// users.getLoans(LoanRequest(username,"active") ).enqueue(object : Callback<LoanType> {
-            userDetails.getDetails(LoanByIdRequest(id)).enqueue(object : Callback<List<LoanDetails>>{
-                override fun onResponse(
-                    call: Call<List<LoanDetails>>,
-                    response: Response<List<LoanDetails>>
-                ) {
-                    data= (response?.body()?.get(0) ?: intArrayOf(0)) as LoanDetails
+            // Fetch data in a suspend function
+            val data = LoanService.LoanDetails(id)
+
+            // Set the data to arguments only after fetching
+            data?.let {
+                val args = Bundle().apply {
+                    putParcelable("user", it)
                 }
+                fragment.arguments = args
 
-                override fun onFailure(call: Call<List<LoanDetails>>, t: Throwable) {
-                    Log.e("LoanDetailsFailure", "Failed to execute request: ${t.message}")
-                    t.printStackTrace()
-                }
-
-            })
-            val fragment=DetailFragment()
-            val args= Bundle()
-            args.putParcelable("user",data)
-            fragment.arguments=args
+                val user = fragment.arguments?.getParcelable<LoanDetails>("user")
+                Log.d("LoanDetails", "Data fetched: ${user?.loanEMI}")
+            }
+            val user = fragment.arguments?.getParcelable<LoanDetails>("user")
+            Log.d("LoanDetails", "Data fetched: ${user?.loanEMI}")
             return fragment
         }
     }

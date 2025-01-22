@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvName"
+            android:id="@+id/id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -23,42 +23,42 @@
             android:padding="5dp"/>
 
         <TextView
-            android:id="@+id/tvUsername"
+            android:id="@+id/loanType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:padding="5dp"/>
 
         <TextView
-            android:id="@+id/tvEmail"
+            android:id="@+id/loanAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:padding="5dp"/>
 
         <TextView
-            android:id="@+id/tvAddress"
+            android:id="@+id/loanAccountNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:padding="5dp"/>
 
         <TextView
-            android:id="@+id/tvPhone"
+            android:id="@+id/loanDuration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:padding="5dp"/>
 
         <TextView
-            android:id="@+id/tvWebsite"
+            android:id="@+id/loanEmi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:padding="5dp"/>
 
         <TextView
-            android:id="@+id/tvCompany"
+            android:id="@+id/status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
