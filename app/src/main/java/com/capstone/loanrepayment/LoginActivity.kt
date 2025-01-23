@@ -1,9 +1,8 @@
 package com.capstone.loanrepayment
 
-
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.loanrepayment.databinding.ActivityLoginBinding
@@ -29,13 +28,14 @@ class LoginActivity : AppCompatActivity() {
                     if (token != null) {
                         TokenManager.saveToken(this, token)
                         TokenManager.saveUserName(this,username)
-                    };
+                    }
                     // Navigate to MainActivity
                     val intent=Intent(this, MainActivity::class.java)
                     startActivity(intent.putExtra("username",username))
                     finish()
                 } else {
-                    Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                    Log.e("failed at login",errorMessage.toString())
+                    Toast.makeText(this, R.string.login_error_message, Toast.LENGTH_SHORT).show()
                 }
             }
         }

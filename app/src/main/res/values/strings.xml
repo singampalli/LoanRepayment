@@ -14,4 +14,7 @@
     <string name="confirm_password">Confirm password</string>
     <string name="loan_type">Loan type : </string>
     <string name="signUp">SignUp</string>
+    <string name="home_profile">Profile</string>
+    <string name="title_dashboard">Active Loans</string>
+    <string name="title_notifications">Closed Loans</string>
 </resources>

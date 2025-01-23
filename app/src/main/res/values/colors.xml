@@ -20,4 +20,21 @@
     <!-- Text colors -->
     <color name="text_primary">#212121</color>
     <color name="text_secondary">#757575</color>
+
+
+    <color name="transparent">#00000000</color>
+
+    <color name="bottom_nav_item_text_color">
+        <selector xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:color="@android:color/white" android:state_checked="true" />
+            <item android:color="@android:color/white" android:state_checked="false" />
+        </selector>
+    </color>
+    <color name="bottom_nav_item_icon_color">
+        <selector xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:color="@android:color/white" android:state_checked="true" />
+            <item android:color="@android:color/white" android:state_checked="false" />
+        </selector>
+    </color>
+
 </resources>
