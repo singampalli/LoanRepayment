@@ -2,6 +2,7 @@ package com.capstone.loanrepayment
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,12 +12,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
+    lateinit var username:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnItemSelectedListener  { item ->
             when (item.itemId) {
@@ -26,14 +26,18 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.navigation_dashboard -> {
-                    // Handle navigation to dashboard
-                    Toast.makeText(this," Item 2 Selected",Toast.LENGTH_SHORT).show()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentSpace, LoanFragment(username,"active"))
+                        .addToBackStack(null)
+                        .commit()
                     true
                 }
 
                 R.id.navigation_notifications -> {
-                    // Handle navigation to notifications
-                    Toast.makeText(this,"Item 3 Selected",Toast.LENGTH_SHORT).show()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentSpace, LoanFragment(username,"closed"))
+                        .addToBackStack(null)
+                        .commit()
                     true
                 }
 
@@ -53,9 +57,9 @@ class MainActivity : AppCompatActivity() {
         }
 //        val username=intent.getStringExtra("username")
         //saved username on success ful login
-        val username=TokenManager.getUserName(this);
+        username= TokenManager.getUserName(this).toString();
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentSpace, LoanFragment(username!!))
+            .replace(R.id.fragmentSpace, LoanFragment(username,"active"))
             .commit()
     }
 

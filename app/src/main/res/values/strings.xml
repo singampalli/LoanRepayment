@@ -12,7 +12,7 @@
     <string name="login_error_message">Invalid Login credentials</string>
     <string name="enter_code">Enter code</string>
     <string name="confirm_password">Confirm password</string>
-    <string name="loan_type">Loan type : </string>
+    <string name="loan_type">Loan type :  </string>
     <string name="signUp">SignUp</string>
     <string name="home_profile">Profile</string>
     <string name="title_dashboard">Active Loans</string>

@@ -31,7 +31,7 @@ class UserAdapter(val users:List<Data>,val onItemClick:(Data)->Unit):RecyclerVie
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user=users[position]
         holder.loanNumber.text=user.loanAccountNumber
-        holder.name.text=user.loanType
+        holder.name.text=user.loanType.toUpperCase()
 //        holder.email.text=user.email
         holder.itemView.setOnClickListener{
             onItemClick(user)

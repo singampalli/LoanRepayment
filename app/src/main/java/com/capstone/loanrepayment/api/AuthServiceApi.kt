@@ -31,14 +31,9 @@ interface AuthServiceApi {
     @POST("/resetPassword")
     fun resetPassword(@Body request: ResetPasswordRequest): Call<ResetPasswordResponse>
 
-    @POST("/loans")
-    fun getLoans(@Body request: LoanRequest): Call<LoanType>
-
-    @POST("/loan")
-    fun getDetails(@Body request: LoanByIdRequest):Call<List<LoanDetails>>
-
     @POST("/register")
     fun register(@Body request: SignUpRequest): Call<SignUpResponse>
+
 }
 
 
