@@ -5,46 +5,56 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardBackgroundColor="#3498DB"
+    app:cardBackgroundColor="#AAD6F6"
     android:elevation="6dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@drawable/border">
+        android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="2.5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Account Number :"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/loanNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:textColor="#000"
             tools:ignore="SmallSp" />
 
+    </LinearLayout>
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="8dp">
+            android:layout_marginTop="2.5dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/loan_type"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="#000" />
+                android:textSize="15sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/loanType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="#000" />
+                android:textSize="15sp"
+                android:textColor="#000"/>
 
         </LinearLayout>
 

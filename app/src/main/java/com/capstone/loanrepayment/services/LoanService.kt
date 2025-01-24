@@ -2,6 +2,7 @@ package com.capstone.loanrepayment.services
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -17,6 +18,7 @@ import com.capstone.loanrepayment.api.LoanByIdRequest
 import com.capstone.loanrepayment.api.LoanRequest
 import com.capstone.loanrepayment.api.LoanServiceApi
 import com.capstone.loanrepayment.api.RetrofitClient
+import com.capstone.loanrepayment.databinding.ActivityMainBinding
 import com.capstone.loanrepayment.models.LoanDetails
 import com.capstone.loanrepayment.models.LoanType
 import kotlinx.coroutines.CompletableDeferred
@@ -34,10 +36,12 @@ object LoanService {
     fun loanTypes(
         context: Context?,
         username: String,
+        status:String,
         recyclerView: RecyclerView,
         parentFragmentManager: FragmentManager
     ) {
-        api.getLoans(LoanRequest(username, "active")).enqueue(object : Callback<LoanType> {
+
+        api.getLoans(LoanRequest(username, status)).enqueue(object : Callback<LoanType> {
             @SuppressLint("ResourceType")
             override fun onResponse(
                 call: Call<LoanType>,

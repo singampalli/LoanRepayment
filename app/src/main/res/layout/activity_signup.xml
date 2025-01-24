@@ -57,7 +57,8 @@
         app:layout_constraintTop_toBottomOf="@id/emailLayout"
         app:layout_constraintWidth_percent="0.9"
         app:boxStrokeColor="@color/purple_500"
-        app:hintTextAppearance="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        app:hintTextAppearance="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"

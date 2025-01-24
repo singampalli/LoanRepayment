@@ -1,69 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentDetails"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragmentDetails"
+    android:layout_gravity="center"
+    android:background="@color/white"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="16dp"
-    android:background="#F8E6B0">
+    android:padding="16dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/id"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingRight="30dp"
+                android:text="Loan Details"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/loanType"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Row 1 Col 1"-->
+<!--                android:textSize="18sp" />-->
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="status"
+                android:textColor="#68BF06"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:stretchColumns="*">
+
+
+            <TableRow>
+
+                <TextView
+                    android:padding="10dp"
+                    android:text="Account Number"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/loanAccountNumber"
+                    android:padding="8dp"
+                    android:text="Row 1 Col 3" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:padding="10dp"
+                    android:text="Loan Amount"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/loanAmount"
+                    android:padding="8dp"
+                    android:text="Row 1 Col 2" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:padding="10dp"
+                    android:text="Loan Duration"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/loanDuration"
+                    android:padding="8dp"
+                    android:text="Row 1 Col 1" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:padding="10dp"
+                    android:text="EMI"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/loanEmi"
+                    android:padding="8dp"
+                    android:text="Row 1 Col 2" />
+            </TableRow>
+
+        </TableLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Loan History"
+            android:paddingTop="18dp"
             android:textStyle="bold"
-            android:padding="5dp"/>
+            android:textSize="20sp"/>
 
-        <TextView
-            android:id="@+id/loanType"
+        <androidx.fragment.app.FragmentContainerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:padding="5dp"/>
+            android:id="@+id/loanHistory">
 
-        <TextView
-            android:id="@+id/loanAmount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:padding="5dp"/>
-
-        <TextView
-            android:id="@+id/loanAccountNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:padding="5dp"/>
-
-        <TextView
-            android:id="@+id/loanDuration"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:padding="5dp"/>
-
-        <TextView
-            android:id="@+id/loanEmi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:padding="5dp"/>
-
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:padding="5dp"/>
+        </androidx.fragment.app.FragmentContainerView>
 
     </LinearLayout>
+
+
 
 </RelativeLayout>

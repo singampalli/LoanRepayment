@@ -1,11 +1,14 @@
 package com.capstone.loanrepayment
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,9 +27,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.create
 
-class LoanFragment(val username:String):Fragment() {
+class LoanFragment(val username:String, val status:String):Fragment() {
 //    lateinit var recyclerView: RecyclerView
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,7 +39,7 @@ class LoanFragment(val username:String):Fragment() {
         val recyclerView:RecyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        LoanService.loanTypes(context,username,recyclerView,parentFragmentManager)
+        LoanService.loanTypes(context,username,status,recyclerView,parentFragmentManager)
         return view
    }
 }
