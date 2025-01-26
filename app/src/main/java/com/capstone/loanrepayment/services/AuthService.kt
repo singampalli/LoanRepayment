@@ -1,5 +1,4 @@
 package com.capstone.loanrepayment.services
-import android.widget.Toast
 import com.capstone.loanrepayment.R
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,6 +13,7 @@ import com.capstone.loanrepayment.api.ResetPasswordResponse
 import com.capstone.loanrepayment.api.RetrofitClient
 import com.capstone.loanrepayment.api.SignUpRequest
 import com.capstone.loanrepayment.api.SignUpResponse
+import com.capstone.loanrepayment.api.userDetailsResponse
 import com.capstone.loanrepayment.models.User
 
 object AuthService {
@@ -91,6 +91,25 @@ object AuthService {
                 }
             }
             override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
+                callback(false, null, "Network error: ${t.message}")
+            }
+        })
+    }
+    fun userDetails(username: String,callback: (Boolean, userDetailsResponse?, String?) -> Unit){
+        val call = api.userDetails(username);
+        call.enqueue(object : Callback<userDetailsResponse> {
+            override fun onResponse(
+                call: Call<userDetailsResponse>,
+                response: Response<userDetailsResponse>
+            ) {
+                if (response.isSuccessful && response.body() != null) {
+                    val userDetails = response.body()!!
+                    callback(true, userDetails, null)
+                } else {
+                    callback(false, null, R.string.login_error_message.toString())
+                }
+            }
+            override fun onFailure(call: Call<userDetailsResponse>, t: Throwable) {
                 callback(false, null, "Network error: ${t.message}")
             }
         })

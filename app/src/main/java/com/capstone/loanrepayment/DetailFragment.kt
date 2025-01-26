@@ -60,13 +60,11 @@ class DetailFragment(val flag: Boolean):Fragment() {
 
 
         user?.let {
-//            id.text = "Id: ${it.id}"
-//            LoanType.text = "${it.loanType.toUpperCase()}"
             LoanAmount.text = "${it.loanAmount}"
             LoanAccountNumber.text = "${it.loanAccountNumber}"
             LoanDuration.text = "${duration.years} years ${duration.months} months ${duration.days} days"
             loanEmi.text = "Rs. ${it.loanEMI}"
-            Status.text = "${it.loanStatus}"
+            Status.text = "${it.loanType.toUpperCase()}(${it.loanStatus})"
         }
 
         if (flag && user != null) {

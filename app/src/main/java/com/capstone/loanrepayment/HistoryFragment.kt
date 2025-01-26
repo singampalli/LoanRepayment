@@ -23,7 +23,7 @@ class HistoryFragment(val data:List<Value>):Fragment() {
 
         val adapter=HistoryAdapter(data)
         recyclerView.adapter=adapter
-        recyclerView.isNestedScrollingEnabled =false
+        recyclerView.isNestedScrollingEnabled =true
         return view
     }
 }
