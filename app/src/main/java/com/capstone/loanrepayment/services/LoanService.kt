@@ -2,16 +2,19 @@ package com.capstone.loanrepayment.services
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.capstone.loanrepayment.DetailFragment
 import com.capstone.loanrepayment.LoanFragment
+import com.capstone.loanrepayment.PaymentActivity
 import com.capstone.loanrepayment.R
 import com.capstone.loanrepayment.api.AuthServiceApi
 import com.capstone.loanrepayment.api.LoanByIdRequest
@@ -48,15 +51,20 @@ object LoanService {
                 response: Response<LoanType>
             ) {
                 val loans = response.body() ?: return
-                val adapter = UserAdapter(loans.data) { user ->
+                val adapter = UserAdapter(loans.data, { user ->
                     GlobalScope.launch {
-                        val userDetailFragment = DetailFragment.newInstance(user.id)
+                        val userDetailFragment = DetailFragment.newInstance(user.id,true)
                         parentFragmentManager.beginTransaction()
                             .replace(R.id.fragmentSpace, userDetailFragment)
                             .addToBackStack(null)
                             .commit()
                     }
-                }
+                },{
+                    id ->
+                    val intent=Intent(context,PaymentActivity::class.java)
+                    intent.putExtra("id",id)
+                    context?.startActivity(intent)
+                })
                 recyclerView.adapter = adapter
             }
 

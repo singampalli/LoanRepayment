@@ -1,0 +1,26 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Payment Option Label -->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Choose Amount"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:paddingBottom="16dp"
+        android:inputType="numberDecimal"
+        android:id="@+id/partialAmount"/>
+
+    <!-- Pay Partial Amount Button -->
+    <Button
+        android:id="@+id/payPartialButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pay Partial Amount"
+        android:layout_marginTop="8dp" />
+</LinearLayout>

@@ -17,4 +17,5 @@
     <string name="home_profile">Profile</string>
     <string name="title_dashboard">Active Loans</string>
     <string name="title_notifications">Closed Loans</string>
+    <string name="title_activity_payment">PaymentActivity</string>
 </resources>
