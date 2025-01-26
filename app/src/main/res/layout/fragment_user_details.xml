@@ -10,8 +10,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        android:padding="15dp">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvUsernameLabel"
@@ -19,12 +20,14 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
             android:text="@string/username"
+            android:layout_marginTop="10dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:paddingBottom="16dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
@@ -33,6 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="8dp"
+            android:layout_marginTop="20dp"
             android:text="@string/email"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
@@ -40,13 +44,15 @@
             android:id="@+id/tvEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnResetPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="start"
+            android:layout_marginTop="20dp"
             android:text="@string/reset_password"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Button" />
 

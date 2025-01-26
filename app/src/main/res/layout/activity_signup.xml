@@ -7,6 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".SignupActivity">
 
+    <!-- Guideline for 5% margin from the left -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/left_guideline_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <include
+        layout="@layout/app_heading"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/left_guideline_5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.9"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/userNameLayout"
         android:layout_width="0dp"
