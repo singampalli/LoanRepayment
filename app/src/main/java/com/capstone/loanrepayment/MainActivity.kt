@@ -21,10 +21,13 @@ class MainActivity : AppCompatActivity() {
         navView.setOnItemSelectedListener  { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
-                    Toast.makeText(this,"Item 1 Selected",Toast.LENGTH_SHORT).show()
+
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentSpace, UserDetailsFragment())
+                        .addToBackStack(null)
+                        .commit()
                     true
                 }
-
                 R.id.navigation_dashboard -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragmentSpace, LoanFragment(username,"active"))
@@ -32,7 +35,6 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     true
                 }
-
                 R.id.navigation_notifications -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragmentSpace, LoanFragment(username,"closed"))
