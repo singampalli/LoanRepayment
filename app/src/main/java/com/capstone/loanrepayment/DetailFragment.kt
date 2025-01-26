@@ -31,7 +31,7 @@ import java.time.Period
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.CountDownLatch
 
-class DetailFragment:Fragment() {
+class DetailFragment(val flag: Boolean):Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreateView(
@@ -51,11 +51,13 @@ class DetailFragment:Fragment() {
         val LoanDuration = view.findViewById<TextView>(R.id.loanDuration)
         val loanEmi = view.findViewById<TextView>(R.id.loanEmi)
         val Status = view.findViewById<TextView>(R.id.status)
+        val history=view.findViewById<TextView>(R.id.history)
 
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
         val Enddate = LocalDate.parse(user?.loanEndDate, formatter)
         val Startdate= LocalDate.parse(user?.loanStartDate, formatter)
         val duration= Period.between(Startdate,Enddate)
+
 
         user?.let {
             LoanAmount.text = "${it.loanAmount}"
@@ -65,7 +67,8 @@ class DetailFragment:Fragment() {
             Status.text = "${it.loanType.toUpperCase()}(${it.loanStatus})"
         }
 
-        if (user != null) {
+        if (flag && user != null) {
+            history.text = "Loan History"
             parentFragmentManager.beginTransaction()
                 .replace(R.id.loanHistory, HistoryFragment(user.loanHistory))
                 .addToBackStack(null)
@@ -81,9 +84,11 @@ class DetailFragment:Fragment() {
         return view
     }
 
+
+
     companion object {
-        suspend fun newInstance(id: Int): DetailFragment {
-            val fragment = DetailFragment()
+        suspend fun newInstance(id: Int,flag:Boolean): DetailFragment {
+            val fragment = DetailFragment(flag)
 
             // Fetch data in a suspend function
             val data = LoanService.LoanDetails(id)
