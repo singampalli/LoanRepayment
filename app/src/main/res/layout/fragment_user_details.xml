@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:padding="16dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvUsernameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:text="@string/username"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvEmailLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:text="@string/email"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnResetPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/reset_password"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
