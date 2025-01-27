@@ -24,28 +24,28 @@
         android:layout_height="wrap_content"
         android:id="@+id/payDetails"/>
 
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="20dp"-->
-<!--        android:elevation="10dp">-->
+    <!--    <androidx.cardview.widget.CardView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="20dp"-->
+    <!--        android:elevation="10dp">-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/clickableBoxFull"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@color/error_red"-->
-<!--                android:gravity="center"-->
-<!--                android:text="Full Payment"-->
+    <!--            <TextView-->
+    <!--                android:id="@+id/clickableBoxFull"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:background="@color/error_red"-->
+    <!--                android:gravity="center"-->
+    <!--                android:text="Full Payment"-->
 
-<!--                android:textColor="@android:color/white"-->
-<!--                android:textSize="20sp"-->
-<!--                android:clickable="true"-->
-<!--                android:focusable="true"-->
-<!--                android:padding="15dp"/>-->
+    <!--                android:textColor="@android:color/white"-->
+    <!--                android:textSize="20sp"-->
+    <!--                android:clickable="true"-->
+    <!--                android:focusable="true"-->
+    <!--                android:padding="15dp"/>-->
 
 
-<!--    </androidx.cardview.widget.CardView>-->
+    <!--    </androidx.cardview.widget.CardView>-->
 
     <RadioGroup
         android:id="@+id/paymentRadioGroup"
@@ -97,49 +97,49 @@
             android:background="?android:attr/selectableItemBackground"/>
     </RadioGroup>
 
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="20dp"-->
-<!--            android:elevation="10dp">-->
+    <!--        <androidx.cardview.widget.CardView-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_margin="20dp"-->
+    <!--            android:elevation="10dp">-->
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
 
-                <TextView
+        <TextView
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-                    android:gravity="center"
-                    android:text="Total Amount : ₹ "
-
-
-                    android:textSize="15sp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:padding="5dp"/>
-
-            <TextView
-                android:id="@+id/totalAmountShow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:gravity="center"
-                android:text="amount"
+            android:gravity="center"
+            android:text="Total Amount : ₹ "
 
 
-                android:textSize="15sp"
-                android:clickable="true"
-                android:focusable="true"
-                android:padding="5dp"/>
-            </LinearLayout>
+            android:textSize="15sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="5dp"/>
+
+        <TextView
+            android:id="@+id/totalAmountShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:gravity="center"
+            android:text="amount"
 
 
-<!--        </androidx.cardview.widget.CardView>-->
+            android:textSize="15sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="5dp"/>
+    </LinearLayout>
+
+
+    <!--        </androidx.cardview.widget.CardView>-->
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
