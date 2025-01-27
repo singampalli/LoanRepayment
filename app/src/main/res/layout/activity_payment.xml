@@ -24,28 +24,122 @@
         android:layout_height="wrap_content"
         android:id="@+id/payDetails"/>
 
-    <androidx.cardview.widget.CardView
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="20dp"-->
+<!--        android:elevation="10dp">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/clickableBoxFull"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/error_red"-->
+<!--                android:gravity="center"-->
+<!--                android:text="Full Payment"-->
+
+<!--                android:textColor="@android:color/white"-->
+<!--                android:textSize="20sp"-->
+<!--                android:clickable="true"-->
+<!--                android:focusable="true"-->
+<!--                android:padding="15dp"/>-->
+
+
+<!--    </androidx.cardview.widget.CardView>-->
+
+    <RadioGroup
+        android:id="@+id/paymentRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:elevation="10dp">
+        android:orientation="vertical"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:padding="8dp"
+        android:layout_marginBottom="32dp">
+
+        <!-- UPI Option -->
+        <RadioButton
+            android:id="@+id/maxAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OutStanding Principal"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:padding="12dp"
+            android:textColor="@android:color/black"
+            android:gravity="start"
+            android:background="?android:attr/selectableItemBackground"/>
+
+        <!-- Credit/Debit Card Option -->
+        <RadioButton
+            android:id="@+id/minAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EMI Amount"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:padding="12dp"
+            android:textColor="@android:color/black"
+            android:gravity="start"
+            android:background="?android:attr/selectableItemBackground"/>
+
+        <!-- Wallet Option -->
+        <RadioButton
+            android:id="@+id/chooseOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:padding="12dp"
+            android:textColor="@android:color/black"
+            android:gravity="start"
+            android:background="?android:attr/selectableItemBackground"/>
+    </RadioGroup>
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="20dp"-->
+<!--            android:elevation="10dp">-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:gravity="center"
+                    android:text="Total Amount : ₹ "
+
+
+                    android:textSize="15sp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="5dp"/>
 
             <TextView
-                android:id="@+id/clickableBoxFull"
-                android:layout_width="match_parent"
+                android:id="@+id/totalAmountShow"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/error_red"
-                android:gravity="center"
-                android:text="Full Payment"
 
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
+                android:gravity="center"
+                android:text="amount"
+
+
+                android:textSize="15sp"
                 android:clickable="true"
                 android:focusable="true"
-                android:padding="15dp"/>
+                android:padding="5dp"/>
+            </LinearLayout>
 
 
-    </androidx.cardview.widget.CardView>
+<!--        </androidx.cardview.widget.CardView>-->
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -53,18 +147,18 @@
         android:layout_margin="20dp"
         android:elevation="10dp">
 
-    <TextView
-        android:id="@+id/clickableBoxPartial"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/error_red"
-        android:gravity="center"
-        android:text="Partial Payment"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:clickable="true"
-        android:focusable="true"
-        android:padding="15dp" />
+        <Button
+            android:id="@+id/clickableBoxPay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/error_red"
+            android:gravity="center"
+            android:text="Pay"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:padding="15dp"
+            android:focusable="true"
+            android:clickable="true"/>
 
     </androidx.cardview.widget.CardView>
 
