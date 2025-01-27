@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
@@ -38,6 +39,8 @@ class PaymentActivity : AppCompatActivity() {
         var minn by Delegates.notNull<Double>()
         var maxx by Delegates.notNull<Double>()
 
+        val chooseAmount=findViewById<EditText>(R.id.chooseAmount)
+        val choose=findViewById<RadioButton>(R.id.chooseOption)
 
         lifecycleScope.launch {
             lateinit var viewFragment: Fragment
@@ -45,7 +48,7 @@ class PaymentActivity : AppCompatActivity() {
                 viewFragment = DetailFragment.newInstance(id, false)
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.payDetails, viewFragment)
-                    .addToBackStack(null)
+//                    .addToBackStack(null)
                     .commit()
             }
             job.join()
@@ -65,7 +68,8 @@ class PaymentActivity : AppCompatActivity() {
             minn=user?.loanEMI.toString().toDouble()
 
             minAmount.setOnClickListener {
-
+                chooseAmount.isEnabled=false
+                chooseAmount.setText("")
                 setValueShow(user?.loanEMI.toString())
             }
 
@@ -85,13 +89,22 @@ class PaymentActivity : AppCompatActivity() {
 
             radioGroup.check(R.id.maxAmount)
             setValueShow(minPrincipal.toString())
+            chooseAmount.setText("")
+            chooseAmount.isEnabled=false
 
+<<<<<<< Updated upstream
             maxAmount.text= getString(R.string.outstanding_amount,minPrincipal.toString())
 
+=======
+            maxAmount.text="Outstanding Principal : ₹ ${minPrincipal.toString()}"
+>>>>>>> Stashed changes
             maxAmount.setOnClickListener {
+                chooseAmount.isEnabled=false
+                chooseAmount.setText("")
                 setValueShow(minPrincipal.toString())
             }
 
+<<<<<<< Updated upstream
         }
 
         val choose=findViewById<RadioButton>(R.id.chooseOption)
@@ -115,12 +128,61 @@ class PaymentActivity : AppCompatActivity() {
                 } else {
                     ToastUtil.showErrorToast(this@PaymentActivity, getString(R.string.valid_amount))
                 }
+=======
+
+//            fullPayment.setOnClickListener {
+//                intent.putExtra(
+//                    "amount",
+//                    user?.loanEMI.toString()
+//                )
+//                startActivity(intent)
+//            }
+            if(minn>=maxx){
+                chooseAmount.visibility= View.GONE
+                minAmount.visibility=View.GONE
+                choose.visibility=View.GONE
+>>>>>>> Stashed changes
             }
         }
 
+
+
+
+        choose.setOnClickListener{
+            chooseAmount.isEnabled=true
+            chooseAmount.setText("")
+
+        }
+//        choose.setOnClickListener {
+//            val dialogBuilder = AlertDialog.Builder(this@PaymentActivity)
+//            val dialogView = layoutInflater.inflate(R.layout.dialog_box, null)
+//
+//            dialogBuilder.setView(dialogView)
+//            val dialog = dialogBuilder.create()
+//            dialog.setCancelable(true)
+//            dialog.show()
+//
+//            partialAmount = dialogView.findViewById(R.id.partialAmount)
+//            payPartialButton = dialogView.findViewById(R.id.payPartialButton)
+//            payPartialButton.setOnClickListener {
+//                if (partialAmount != null && (partialAmount.text.toString().toDouble() >= minn
+//                            && partialAmount.text.toString().toDouble() <= maxx)) {
+//                    setValueShow(partialAmount.text.toString())
+//                    dialog.dismiss()
+//
+//                } else {
+//                    Toast.makeText(this@PaymentActivity, "Enter valid amount", Toast.LENGTH_SHORT)
+//                        .show()
+//                }
+//            }
+//        }
+
         val pay=findViewById<Button>(R.id.clickableBoxPay)
         pay.setOnClickListener{
-            val sendAmount="Amount : ₹ ${findViewById<TextView>(R.id.totalAmountShow).text.toString()}"
+            var sendAmount="${findViewById<TextView>(R.id.totalAmountShow).text.toString()}"
+            val data=chooseAmount.text.toString()
+            if(data!="") sendAmount=chooseAmount.text.toString()
+            intent.putExtra("id",id)
             intent.putExtra("amount", sendAmount)
             startActivity(intent)
         }
@@ -128,6 +190,7 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun setValueShow(value:String){
+
         val show=findViewById<TextView>(R.id.totalAmountShow)
         show.text=value
     }

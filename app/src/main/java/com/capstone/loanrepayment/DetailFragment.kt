@@ -69,9 +69,11 @@ class DetailFragment(val flag: Boolean):Fragment() {
 
         if (flag && user != null) {
             history.text = "Loan History"
+//            val date=user.loanHistory[0]
+            val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
             parentFragmentManager.beginTransaction()
-                .replace(R.id.loanHistory, HistoryFragment(user.loanHistory))
-                .addToBackStack(null)
+                .replace(R.id.loanHistory, HistoryFragment(user.loanHistory.sortedByDescending { LocalDate.parse(it.date, formatter) }.sortedBy { it.principalLeft }))
+//                .addToBackStack(null)
                 .commit()
         }
 
@@ -107,5 +109,6 @@ class DetailFragment(val flag: Boolean):Fragment() {
             Log.d("LoanDetails", "Data fetched: ${user?.loanEMI}")
             return fragment
         }
+
     }
 }

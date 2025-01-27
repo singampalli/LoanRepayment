@@ -16,7 +16,14 @@ import androidx.compose.material3.Snackbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import coil.load
+import com.capstone.loanrepayment.api.ApiResponse
+import com.capstone.loanrepayment.api.LoanHistory
+import com.capstone.loanrepayment.api.LoanServiceApi
+import com.capstone.loanrepayment.api.RetrofitClient
 import com.google.android.material.snackbar.Snackbar
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PaymentGatewayActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -25,7 +32,8 @@ class PaymentGatewayActivity : AppCompatActivity() {
         setContentView(R.layout.activity_payment_gateway)
         val payableAmount=findViewById<TextView>(R.id.payableAmount)
         val amount=intent.getStringExtra("amount")
-        payableAmount.text=amount.toString()
+        val id=intent.getIntExtra("id",0)
+        payableAmount.text="Amount : ₹ ${amount.toString()}"
 
 
         // UPI Card Views
@@ -49,7 +57,7 @@ class PaymentGatewayActivity : AppCompatActivity() {
 //            Toast.makeText(this, "Google Pay selected", Toast.LENGTH_SHORT).show()
             Snackbar.make(it,"Redirecting...",Snackbar.LENGTH_SHORT).show()
             if (amount != null) {
-                payDialogDisplay(amount)
+                payDialogDisplay(amount,id)
             }
         }
 
@@ -57,7 +65,7 @@ class PaymentGatewayActivity : AppCompatActivity() {
 //            Toast.makeText(this, "PhonePe selected", Toast.LENGTH_SHORT).show()
             Snackbar.make(it,"Redirecting...",Snackbar.LENGTH_SHORT).show()
             if (amount != null) {
-                payDialogDisplay(amount)
+                payDialogDisplay(amount,id)
             }
         }
 
@@ -65,7 +73,7 @@ class PaymentGatewayActivity : AppCompatActivity() {
 //            Toast.makeText(this, "Paytm selected", Toast.LENGTH_SHORT).show()
             Snackbar.make(it,"Redirecting...",Snackbar.LENGTH_SHORT).show()
             if (amount != null) {
-                payDialogDisplay(amount)
+                payDialogDisplay(amount,id)
             }
         }
 
@@ -78,7 +86,7 @@ class PaymentGatewayActivity : AppCompatActivity() {
 //            Toast.makeText(this, "Processing Card Payment", Toast.LENGTH_SHORT).show()
             Snackbar.make(it,"Processing Card Payment...",Snackbar.LENGTH_SHORT).show()
             if (amount != null) {
-                payDialogDisplay(amount)
+                payDialogDisplay(amount,id)
             }
         }
 
@@ -91,7 +99,7 @@ class PaymentGatewayActivity : AppCompatActivity() {
 //            Toast.makeText(this, "Paytm Wallet selected", Toast.LENGTH_SHORT).show()
             Snackbar.make(it,"Redirecting...",Snackbar.LENGTH_SHORT).show()
             if (amount != null) {
-                payDialogDisplay(amount)
+                payDialogDisplay(amount,id)
             }
         }
 
@@ -99,7 +107,7 @@ class PaymentGatewayActivity : AppCompatActivity() {
 //            Toast.makeText(this, "Amazon Pay selected", Toast.LENGTH_SHORT).show()
             Snackbar.make(it,"Redirecting...",Snackbar.LENGTH_SHORT).show()
             if (amount != null) {
-                payDialogDisplay(amount)
+                payDialogDisplay(amount,id)
             }
         }
     }
@@ -111,32 +119,52 @@ class PaymentGatewayActivity : AppCompatActivity() {
         }
     }
     @SuppressLint("MissingInflatedId")
-    private fun payDialogDisplay(amount:String){
+    private fun payDialogDisplay(amount:String,id:Int){
 //        clickable.setOnClickListener{
-            val dialogBuilder= AlertDialog.Builder(this)
-            val dialogView=layoutInflater.inflate(R.layout.payment_dialog, null)
-            val finalAmount=dialogView.findViewById<TextView>(R.id.finalPay)
-            val pay=dialogView.findViewById<Button>(R.id.pay)
-            finalAmount.text=amount
-            dialogBuilder.setView(dialogView)
-            val dialog=dialogBuilder.create()
-            dialog.setCancelable(true)
-            dialog.show()
+        val dialogBuilder= AlertDialog.Builder(this)
+        val dialogView=layoutInflater.inflate(R.layout.payment_dialog, null)
+        val finalAmount=dialogView.findViewById<TextView>(R.id.finalPay)
+        val pay=dialogView.findViewById<Button>(R.id.pay)
+        finalAmount.text=amount
+        dialogBuilder.setView(dialogView)
+        val dialog=dialogBuilder.create()
+        dialog.setCancelable(true)
+        dialog.show()
 
-            pay.setOnClickListener{
-                dialog.dismiss()
-                val dialogBuilderSuccess=AlertDialog.Builder(this)
-                val dialogView=layoutInflater.inflate(R.layout.payment_sucess,null)
-                val gif=dialogView.findViewById<ImageView>(R.id.gif)
-                gif.load(R.drawable.success){
-                    crossfade(true)
-                }
-                dialogBuilderSuccess.setView(dialogView)
-                val dialogSuccess=dialogBuilderSuccess.create()
-                dialogSuccess.setCancelable(true)
-                dialogSuccess.show()
+        pay.setOnClickListener{
+            dialog.dismiss()
+            val dialogBuilderSuccess=AlertDialog.Builder(this)
+            val dialogView=layoutInflater.inflate(R.layout.payment_sucess,null)
+            val gif=dialogView.findViewById<ImageView>(R.id.gif)
+            gif.load(R.drawable.success){
+                crossfade(true)
             }
+            dialogBuilderSuccess.setView(dialogView)
+            val dialogSuccess=dialogBuilderSuccess.create()
+            dialogSuccess.setCancelable(true)
+            dialogSuccess.show()
+
+            addHistory(id,amount.toFloat())
+        }
 //        }
+    }
+
+    private fun addHistory(id:Int,amount:Float){
+        val api = RetrofitClient.instance.create(LoanServiceApi::class.java)
+//        api.postHistory(LoanHistory(id,amount))
+        api.postHistory(LoanHistory(id,amount)).enqueue(object : Callback<ApiResponse> {
+            override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
+                if (response.body()?.success == true) {
+                    Toast.makeText(this@PaymentGatewayActivity, "Payment Added Successfully", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@PaymentGatewayActivity, "Failed: ${response.body()?.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
+                Toast.makeText(this@PaymentGatewayActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 }

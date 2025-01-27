@@ -59,19 +59,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-            val token = TokenManager.getToken(this)
-//        val logoutTextView = findViewById<TextView>(R.id.logout)
-//
-//        // Set an OnClickListener to handle the logout action
-//        logoutTextView.setOnClickListener {
-//            // Clear the token using TokenManager
-//            TokenManager.clearToken(this)
-//            // Redirect to LoginActivity
-//            startActivity(Intent(this, LoginActivity::class.java))
-//            finish()
-//        }
-//        val username=intent.getStringExtra("username")
-        //saved username on success ful login
         username= TokenManager.getUserName(this).toString();
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentSpace, LoanFragment(username,"active"))
