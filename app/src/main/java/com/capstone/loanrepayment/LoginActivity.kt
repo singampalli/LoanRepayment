@@ -3,6 +3,7 @@ package com.capstone.loanrepayment
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.loanrepayment.databinding.ActivityLoginBinding
@@ -10,6 +11,7 @@ import com.capstone.loanrepayment.services.AuthService
 import com.capstone.loanrepayment.util.CommonFunctionUtil
 import com.capstone.loanrepayment.util.ToastUtil
 import com.capstone.loanrepayment.util.TokenManager
+import com.google.android.material.textfield.TextInputLayout
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -23,6 +25,19 @@ class LoginActivity : AppCompatActivity() {
             // Handle login
             val username = binding.usernameEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
+
+            val usernameInput= findViewById<TextInputLayout>(R.id.usernameLayout);
+            val passwordInput= findViewById<TextInputLayout>(R.id.passwordLayout);
+
+            if(username.isEmpty() ){
+                usernameInput.error = getString(R.string.username_empty)
+                return@setOnClickListener
+            }
+            if(password.isEmpty() ){
+                passwordInput.error = getString(R.string.password_empty)
+                return@setOnClickListener
+            }
+
             if (validateCredentials(username, password)) {
                 AuthService.authenticateUser(username, password) { success, token, errorMessage ->
                     if (success) {

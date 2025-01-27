@@ -13,6 +13,12 @@ object CommonFunctionUtil {
                 username.matches(usernamePattern.toRegex())
     }
 
+    fun isValidEmail(email: String): Boolean {
+        val emailPattern = "^[a-zA-Z0-9_]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+\$"
+        return email.isNotEmpty() &&
+                email.matches(emailPattern.toRegex())
+    }
+
     fun isValidPassword(password: String): Boolean {
 //        val passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{8,}$"
         return password.isNotEmpty() &&

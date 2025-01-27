@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.capstone.loanrepayment.databinding.ActivityForgotPasswordBinding
 import com.capstone.loanrepayment.services.AuthService
+import com.capstone.loanrepayment.util.CommonFunctionUtil
 import com.capstone.loanrepayment.util.ToastUtil
 import com.capstone.loanrepayment.util.TokenManager
 import com.google.android.material.button.MaterialButton
@@ -63,6 +64,21 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 }
 
             } else {
+                if(email.isEmpty()){
+                    emailInput.error = getString(R.string.email_required)
+                    return@setOnClickListener
+                }else if(!CommonFunctionUtil.isValidEmail(email)){
+                    emailInput.error = getString(R.string.invalid_email)
+                    return@setOnClickListener
+                }else{
+                    emailInput.error = null
+                }
+                if(emailEditText.isVisible && resetCodeInput.isEmpty()){
+                    codeInput = findViewById(R.id.codeInput)
+                    codeInput.error =  getString(R.string.empty_code);
+                    return@setOnClickListener
+                }
+
                 val call = AuthService.forgotPassword(email){success, resetCode, errorMessage ->
                     if (success) {
                         // Store the token if SharedPreferences

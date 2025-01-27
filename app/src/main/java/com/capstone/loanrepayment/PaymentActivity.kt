@@ -6,28 +6,18 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.FrameLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
 import com.capstone.loanrepayment.models.LoanDetails
-import kotlinx.coroutines.GlobalScope
+import com.capstone.loanrepayment.util.ToastUtil
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import org.w3c.dom.Text
 import java.time.LocalDate
 import java.time.chrono.ChronoLocalDate
 import java.time.format.DateTimeFormatter
@@ -40,9 +30,6 @@ class PaymentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
-//        val partialPayment=findViewById<TextView>(R.id.clickableBoxPartial)
-//        val fullPayment=findViewById<TextView>(R.id.clickableBoxFull)
-//        val payDetails=findViewById<FrameLayout>(R.id.payDetails)
         lateinit var partialAmount: EditText
         lateinit var payPartialButton: Button
 
@@ -72,9 +59,8 @@ class PaymentActivity : AppCompatActivity() {
             val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
             val formattedDate: ChronoLocalDate =LocalDate.parse( today.format(formatter),formatter)
 
-//
             val user = viewFragment.arguments?.getParcelable<LoanDetails>("user")
-            minAmount.text="EMI Amount : ₹ ${user?.loanEMI.toString()}"
+            minAmount.text=getString(R.string.emi_amount, user?.loanEMI.toString())
 
             minn=user?.loanEMI.toString().toDouble()
 
@@ -82,7 +68,7 @@ class PaymentActivity : AppCompatActivity() {
 
                 setValueShow(user?.loanEMI.toString())
             }
-//
+
             var minPrincipal: Float? =user?.loanAmount?.toFloat()
             val history=user?.loanHistory
 
@@ -100,19 +86,11 @@ class PaymentActivity : AppCompatActivity() {
             radioGroup.check(R.id.maxAmount)
             setValueShow(minPrincipal.toString())
 
-            maxAmount.text="OutStanding Principal : ₹ ${minPrincipal.toString()}"
+            maxAmount.text= getString(R.string.outstanding_amount,minPrincipal.toString())
+
             maxAmount.setOnClickListener {
                 setValueShow(minPrincipal.toString())
             }
-
-
-//            fullPayment.setOnClickListener {
-//                intent.putExtra(
-//                    "amount",
-//                    user?.loanEMI.toString()
-//                )
-//                startActivity(intent)
-//            }
 
         }
 
@@ -135,8 +113,7 @@ class PaymentActivity : AppCompatActivity() {
                     dialog.dismiss()
 
                 } else {
-                    Toast.makeText(this@PaymentActivity, "Enter valid amount", Toast.LENGTH_SHORT)
-                        .show()
+                    ToastUtil.showErrorToast(this@PaymentActivity, getString(R.string.valid_amount))
                 }
             }
         }
