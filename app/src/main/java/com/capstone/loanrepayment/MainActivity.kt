@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentSpace, LoanFragment(username,"active"))
             .commit()
+        navView.selectedItemId = R.id.navigation_dashboard
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
