@@ -64,7 +64,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 }
 
             } else {
-<<<<<<< Updated upstream
+
                 if(email.isEmpty()){
                     emailInput.error = getString(R.string.email_required)
                     return@setOnClickListener
@@ -80,10 +80,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
 
-                val call = AuthService.forgotPassword(email){success, resetCode, errorMessage ->
-=======
                  AuthService.forgotPassword(email){success, resetCode, errorMessage ->
->>>>>>> Stashed changes
                     if (success) {
                         // Store the token if SharedPreferences
                         if (resetCode != null) {
