@@ -1,5 +1,4 @@
 package com.capstone.loanrepayment
-
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
@@ -11,12 +10,10 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.capstone.loanrepayment.models.LoanDetails
-import com.capstone.loanrepayment.util.ToastUtil
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -107,9 +104,6 @@ class PaymentActivity : AppCompatActivity() {
                 choose.visibility=View.GONE
             }
         }
-
-
-
 
         choose.setOnClickListener{
             chooseAmount.isEnabled=true

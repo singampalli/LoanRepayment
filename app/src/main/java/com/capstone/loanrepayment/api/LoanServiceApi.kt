@@ -7,7 +7,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 data class ApiResponse(
-    val success: Boolean,
+    val status:  Boolean,
     val message: String
 )
 
