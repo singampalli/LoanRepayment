@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">LoanRepayment</string>
     <string name="login">Login</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="reset_password">Reset Password</string>
@@ -37,4 +36,6 @@
     <string name="outstanding_amount">"OutStanding Principal : ₹ %s"</string>
     <string name="empty_code">"Code can't be empty"</string>
     <string name="valid_amount">"Amount should not be less than minimum"</string>
+    <string name="call_message">"call us: 1800 1234 5671"</string>
+    <string name="app_name">LoanRepayment</string>
 </resources>

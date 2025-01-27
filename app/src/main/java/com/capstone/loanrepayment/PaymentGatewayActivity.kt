@@ -1,7 +1,10 @@
 package com.capstone.loanrepayment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -20,6 +23,7 @@ import com.capstone.loanrepayment.api.ApiResponse
 import com.capstone.loanrepayment.api.LoanHistory
 import com.capstone.loanrepayment.api.LoanServiceApi
 import com.capstone.loanrepayment.api.RetrofitClient
+import com.capstone.loanrepayment.util.ToastUtil
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
@@ -133,16 +137,16 @@ class PaymentGatewayActivity : AppCompatActivity() {
 
         pay.setOnClickListener{
             dialog.dismiss()
-            val dialogBuilderSuccess=AlertDialog.Builder(this)
-            val dialogView=layoutInflater.inflate(R.layout.payment_sucess,null)
-            val gif=dialogView.findViewById<ImageView>(R.id.gif)
-            gif.load(R.drawable.success){
-                crossfade(true)
-            }
-            dialogBuilderSuccess.setView(dialogView)
-            val dialogSuccess=dialogBuilderSuccess.create()
-            dialogSuccess.setCancelable(true)
-            dialogSuccess.show()
+//            val dialogBuilderSuccess=AlertDialog.Builder(this)
+//            val dialogView=layoutInflater.inflate(R.layout.payment_sucess,null)
+//            val gif=dialogView.findViewById<ImageView>(R.id.gif)
+//            gif.load(R.drawable.success){
+//                crossfade(true)
+//            }
+//            dialogBuilderSuccess.setView(dialogView)
+//            val dialogSuccess=dialogBuilderSuccess.create()
+//            dialogSuccess.setCancelable(true)
+//            dialogSuccess.show()
 
             addHistory(id,amount.toFloat())
         }
@@ -154,15 +158,21 @@ class PaymentGatewayActivity : AppCompatActivity() {
 //        api.postHistory(LoanHistory(id,amount))
         api.postHistory(LoanHistory(id,amount)).enqueue(object : Callback<ApiResponse> {
             override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
-                if (response.body()?.success == true) {
-                    Toast.makeText(this@PaymentGatewayActivity, "Payment Added Successfully", Toast.LENGTH_SHORT).show()
+                if (response.body()?.status!!) {
+                    ToastUtil.showSuccessToast(this@PaymentGatewayActivity, "Payment Added Successfully")
+                    // Add a 5-second delay before redirecting to MainActivity
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        val intent = Intent(this@PaymentGatewayActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }, 5000)
                 } else {
-                    Toast.makeText(this@PaymentGatewayActivity, "Failed: ${response.body()?.message}", Toast.LENGTH_SHORT).show()
+                    ToastUtil.showErrorToast(this@PaymentGatewayActivity, "Failed: ${response.body()?.message}")
                 }
             }
 
             override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
-                Toast.makeText(this@PaymentGatewayActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                ToastUtil.showErrorToast(this@PaymentGatewayActivity, "Error: ${t.message}")
             }
         })
     }
