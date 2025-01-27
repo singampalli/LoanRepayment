@@ -2,11 +2,13 @@ package com.capstone.loanrepayment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.loanrepayment.services.AuthService
+import com.capstone.loanrepayment.util.ToastUtil
 
 
 class SignupActivity : AppCompatActivity() {
@@ -26,7 +28,7 @@ class SignupActivity : AppCompatActivity() {
             val password = etPassword.text.toString()
 
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                ToastUtil.showErrorToast(this, getString(R.string.all_fields_needed))
             } else {
                 // Handle sign-up logic here
                 AuthService.registerUser(
@@ -36,12 +38,13 @@ class SignupActivity : AppCompatActivity() {
                 ) { success, token, errorMessage ->
                     if (success) {
                         // Navigate to MainActivity
+                        ToastUtil.showSuccessToast(this, getString(R.string.signup_success))
                         val intent = Intent(this, LoginActivity::class.java)
                         startActivity(intent);
                     } else {
-                        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                        Log.e("SignupActivity", errorMessage!!)
+                        ToastUtil.showErrorToast(this, errorMessage)
                     }
-                    Toast.makeText(this, "Sign up successful!", Toast.LENGTH_SHORT).show()
                 }
             }
         }

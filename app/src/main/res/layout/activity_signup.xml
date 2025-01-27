@@ -32,8 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.9"
-        app:boxStrokeColor="@color/purple_500"
-        app:hintTextAppearance="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        app:boxStrokeColor="@color/purple_500">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etUsername"
@@ -52,8 +51,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/userNameLayout"
         app:layout_constraintWidth_percent="0.9"
-        app:boxStrokeColor="@color/purple_500"
-        app:hintTextAppearance="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        app:boxStrokeColor="@color/purple_500">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
@@ -73,7 +71,6 @@
         app:layout_constraintTop_toBottomOf="@id/emailLayout"
         app:layout_constraintWidth_percent="0.9"
         app:boxStrokeColor="@color/purple_500"
-        app:hintTextAppearance="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText

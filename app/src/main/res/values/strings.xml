@@ -37,5 +37,7 @@
     <string name="empty_code">"Code can't be empty"</string>
     <string name="valid_amount">"Amount should not be less than minimum"</string>
     <string name="call_message">"call us: 1800 1234 5671"</string>
-    <string name="app_name">LoanRepayment</string>
+    <string name="app_name">"LoanRepayment"</string>
+    <string name="all_fields_needed">"Please fill in all fields"</string>
+    <string name="signup_success">""Sign up successful!""</string>
 </resources>
