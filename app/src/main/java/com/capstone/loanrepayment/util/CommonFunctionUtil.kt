@@ -4,6 +4,19 @@ import android.content.Intent
 import androidx.core.content.ContextCompat.startActivity
 import com.capstone.loanrepayment.MainActivity
 
-class CommonFunctionUtil {
+object CommonFunctionUtil {
+    fun isValidUsername(username: String): Boolean {
+        val usernamePattern = "^[a-zA-Z0-9_]{3,20}$"
+        return username.isNotEmpty() &&
+                username.length >= 3 &&
+                username.length <= 20 &&
+                username.matches(usernamePattern.toRegex())
+    }
 
+    fun isValidPassword(password: String): Boolean {
+//        val passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{8,}$"
+        return password.isNotEmpty() &&
+                password.length >= 8
+//                &&                 password.matches(passwordPattern.toRegex())
+    }
 }

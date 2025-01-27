@@ -4,7 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
+
+import androidx.appcompat.widget.Toolbar
+
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.loanrepayment.databinding.ActivityMainBinding
 import com.capstone.loanrepayment.util.TokenManager
@@ -16,7 +22,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+
+
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnItemSelectedListener  { item ->
             when (item.itemId) {
@@ -48,15 +60,16 @@ class MainActivity : AppCompatActivity() {
 
         }
             val token = TokenManager.getToken(this)
-
-        binding.logout.setOnClickListener {
-            // Clear the token using TokenManager
-            TokenManager.clearToken(this)
-
-            // Redirect to LoginActivity
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
+//        val logoutTextView = findViewById<TextView>(R.id.logout)
+//
+//        // Set an OnClickListener to handle the logout action
+//        logoutTextView.setOnClickListener {
+//            // Clear the token using TokenManager
+//            TokenManager.clearToken(this)
+//            // Redirect to LoginActivity
+//            startActivity(Intent(this, LoginActivity::class.java))
+//            finish()
+//        }
 //        val username=intent.getStringExtra("username")
         //saved username on success ful login
         username= TokenManager.getUserName(this).toString();
@@ -65,7 +78,26 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.top_menu, menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here.
+        return when (item.itemId) {
+            R.id.action_logout -> {
+                // Clear the token using TokenManager
+                TokenManager.clearToken(this)
 
+                // Redirect to LoginActivity
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
     override fun onResume() {
         super.onResume()
         // Check if the token exists on resume

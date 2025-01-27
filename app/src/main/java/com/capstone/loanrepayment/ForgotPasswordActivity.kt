@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.capstone.loanrepayment.databinding.ActivityForgotPasswordBinding
 import com.capstone.loanrepayment.services.AuthService
+import com.capstone.loanrepayment.util.ToastUtil
 import com.capstone.loanrepayment.util.TokenManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
@@ -52,12 +53,14 @@ class ForgotPasswordActivity : AppCompatActivity() {
             if (!resetCodeInput.isEmpty() && !emailEditText.isVisible) {
                 if(resetCodeInput == TokenManager.getResetCode(this)){
                     Toast.makeText(this,"Reset to new password",Toast.LENGTH_LONG).show()
+                    ToastUtil.showSuccessToast(this,getString(R.string.reset_to_new))
                     val intent=Intent(this, ResetPasswordActivity::class.java)
                     startActivity(intent.putExtra("email",email))
                     finish()
                 }
-                else
-                    Toast.makeText(this,"Code is invalied",Toast.LENGTH_SHORT).show()
+                else{
+                    ToastUtil.showErrorToast(this,getString(R.string.invalid_code))
+                }
 
             } else {
                 val call = AuthService.forgotPassword(email){success, resetCode, errorMessage ->
@@ -68,10 +71,10 @@ class ForgotPasswordActivity : AppCompatActivity() {
                             codeInput = findViewById(R.id.codeInput)
                             codeInput.visibility = View.VISIBLE
                             emailEditText.visibility = View.GONE
-                            Toast.makeText(this, "Code sent to your email successfully", Toast.LENGTH_SHORT).show()
+                            ToastUtil.showSuccessToast(this,getString(R.string.code_sent))
                         };
                     } else {
-                        Toast.makeText(this, "reset password call failed", Toast.LENGTH_SHORT).show()
+                        ToastUtil.showErrorToast(this,getString(R.string.rest_failed))
                     }
 
                 }

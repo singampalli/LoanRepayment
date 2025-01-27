@@ -7,6 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.loanrepayment.databinding.ActivityLoginBinding
 import com.capstone.loanrepayment.services.AuthService
+import com.capstone.loanrepayment.util.CommonFunctionUtil
+import com.capstone.loanrepayment.util.ToastUtil
 import com.capstone.loanrepayment.util.TokenManager
 
 class LoginActivity : AppCompatActivity() {
@@ -21,23 +23,26 @@ class LoginActivity : AppCompatActivity() {
             // Handle login
             val username = binding.usernameEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
-
-            AuthService.authenticateUser(username, password) { success, token, errorMessage ->
-                if (success) {
-                    // Store the token if SharedPreferences
-                    if (token != null) {
-                        TokenManager.saveToken(this, token)
-                        TokenManager.saveUserName(this,username)
+            if (validateCredentials(username, password)) {
+                AuthService.authenticateUser(username, password) { success, token, errorMessage ->
+                    if (success) {
+                        // Store the token if SharedPreferences
+                        if (token != null) {
+                            TokenManager.saveToken(this, token)
+                            TokenManager.saveUserName(this, username)
+                        }
+                        ToastUtil.showSuccessToast(this, getString(R.string.login_successful))
+                        // Navigate to MainActivity
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent.putExtra("username", username))
+                        finish()
+                    } else {
+                        Log.e("failed at login", errorMessage.toString())
+                        ToastUtil.showErrorToast(this, getString(R.string.login_error_message))
                     }
-                    // Navigate to MainActivity
-                    val intent=Intent(this, MainActivity::class.java)
-                    startActivity(intent.putExtra("username",username))
-                    finish()
-                } else {
-                    Log.e("failed at login",errorMessage.toString())
-                    Toast.makeText(this, R.string.login_error_message, Toast.LENGTH_SHORT).show()
                 }
             }
+
         }
         binding.forgotPasswordTextView.setOnClickListener {
             startActivity(Intent(this, ForgotPasswordActivity::class.java))
@@ -46,4 +51,27 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, SignupActivity::class.java))
         }
     }
+
+    fun validateCredentials(username: String, password: String): Boolean {
+        // Retrieve username and password from EditText
+
+        // Validate username and password
+        val isUsernameValid = CommonFunctionUtil.isValidUsername(username)
+        val isPasswordValid = CommonFunctionUtil.isValidPassword(password)
+        val errorMessages = mutableListOf<String>()
+        if (!isUsernameValid) {
+            errorMessages.add(getString(R.string.invalid_username))
+        }
+        if (!isPasswordValid) {
+            errorMessages.add(getString(R.string.invalid_password))
+        }
+        if (errorMessages.isNotEmpty()) {
+            val combinedErrors = errorMessages.joinToString(separator = "\n")
+            ToastUtil.showErrorToast(this, combinedErrors)
+            return false;
+        }
+        return true;
+    }
 }
+
+
