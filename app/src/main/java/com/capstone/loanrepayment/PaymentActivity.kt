@@ -92,56 +92,19 @@ class PaymentActivity : AppCompatActivity() {
             chooseAmount.setText("")
             chooseAmount.isEnabled=false
 
-<<<<<<< Updated upstream
             maxAmount.text= getString(R.string.outstanding_amount,minPrincipal.toString())
 
-=======
-            maxAmount.text="Outstanding Principal : ₹ ${minPrincipal.toString()}"
->>>>>>> Stashed changes
             maxAmount.setOnClickListener {
                 chooseAmount.isEnabled=false
                 chooseAmount.setText("")
                 setValueShow(minPrincipal.toString())
             }
 
-<<<<<<< Updated upstream
-        }
 
-        val choose=findViewById<RadioButton>(R.id.chooseOption)
-        choose.setOnClickListener {
-            val dialogBuilder = AlertDialog.Builder(this@PaymentActivity)
-            val dialogView = layoutInflater.inflate(R.layout.dialog_box, null)
-
-            dialogBuilder.setView(dialogView)
-            val dialog = dialogBuilder.create()
-            dialog.setCancelable(true)
-            dialog.show()
-
-            partialAmount = dialogView.findViewById(R.id.partialAmount)
-            payPartialButton = dialogView.findViewById(R.id.payPartialButton)
-            payPartialButton.setOnClickListener {
-                if (partialAmount != null && (partialAmount.text.toString().toDouble() >= minn
-                            && partialAmount.text.toString().toDouble() <= maxx)) {
-                    setValueShow(partialAmount.text.toString())
-                    dialog.dismiss()
-
-                } else {
-                    ToastUtil.showErrorToast(this@PaymentActivity, getString(R.string.valid_amount))
-                }
-=======
-
-//            fullPayment.setOnClickListener {
-//                intent.putExtra(
-//                    "amount",
-//                    user?.loanEMI.toString()
-//                )
-//                startActivity(intent)
-//            }
             if(minn>=maxx){
                 chooseAmount.visibility= View.GONE
                 minAmount.visibility=View.GONE
                 choose.visibility=View.GONE
->>>>>>> Stashed changes
             }
         }
 
@@ -153,29 +116,6 @@ class PaymentActivity : AppCompatActivity() {
             chooseAmount.setText("")
 
         }
-//        choose.setOnClickListener {
-//            val dialogBuilder = AlertDialog.Builder(this@PaymentActivity)
-//            val dialogView = layoutInflater.inflate(R.layout.dialog_box, null)
-//
-//            dialogBuilder.setView(dialogView)
-//            val dialog = dialogBuilder.create()
-//            dialog.setCancelable(true)
-//            dialog.show()
-//
-//            partialAmount = dialogView.findViewById(R.id.partialAmount)
-//            payPartialButton = dialogView.findViewById(R.id.payPartialButton)
-//            payPartialButton.setOnClickListener {
-//                if (partialAmount != null && (partialAmount.text.toString().toDouble() >= minn
-//                            && partialAmount.text.toString().toDouble() <= maxx)) {
-//                    setValueShow(partialAmount.text.toString())
-//                    dialog.dismiss()
-//
-//                } else {
-//                    Toast.makeText(this@PaymentActivity, "Enter valid amount", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
-//            }
-//        }
 
         val pay=findViewById<Button>(R.id.clickableBoxPay)
         pay.setOnClickListener{
@@ -186,9 +126,7 @@ class PaymentActivity : AppCompatActivity() {
             intent.putExtra("amount", sendAmount)
             startActivity(intent)
         }
-
     }
-
     private fun setValueShow(value:String){
 
         val show=findViewById<TextView>(R.id.totalAmountShow)
