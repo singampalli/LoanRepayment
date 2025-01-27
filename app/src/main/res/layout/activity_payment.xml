@@ -54,8 +54,7 @@
         android:orientation="vertical"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp"
-        android:padding="8dp"
-        android:layout_marginBottom="32dp">
+        >
 
         <!-- UPI Option -->
         <RadioButton
@@ -88,7 +87,7 @@
             android:id="@+id/chooseOption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choose"
+            android:text="Choose Amount"
             android:textSize="16sp"
             android:layout_marginBottom="8dp"
             android:padding="12dp"
@@ -103,11 +102,18 @@
     <!--            android:layout_margin="20dp"-->
     <!--            android:elevation="10dp">-->
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Amount"
+        android:id="@+id/chooseAmount"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:visibility="gone">
 
         <TextView
 

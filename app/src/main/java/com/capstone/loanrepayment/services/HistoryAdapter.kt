@@ -33,6 +33,7 @@ class HistoryAdapter(val history:List<Value>): RecyclerView.Adapter<HistoryAdapt
         holder.interestPaid.text=his.interestPaid.toString()
         holder.principalPaid.text=his.principalPaid.toString()
         holder.principalLeft.text=his.principalLeft.toString()
+        if(his.principalLeft<=0) holder.principalLeft.text="0"
     }
 
     override fun getItemCount(): Int {
