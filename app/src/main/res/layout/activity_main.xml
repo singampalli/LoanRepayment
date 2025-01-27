@@ -10,38 +10,14 @@
     android:id="@+id/mainActivity">
 
     <!-- Header Section (10%) -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/logout"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_gravity="end"
-            android:layout_marginTop="27dp"
-            android:layout_marginEnd="20dp" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/your_loans"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="27dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:title="@string/app_heading"
+        app:titleTextColor="@color/white"
+        tools:ignore="MissingConstraints" />
 
     <!-- Body Section (80%) -->
     <androidx.fragment.app.FragmentContainerView
@@ -51,7 +27,6 @@
         android:layout_weight="8"/>
 
     <!-- Footer Section (10%) -->
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="match_parent"

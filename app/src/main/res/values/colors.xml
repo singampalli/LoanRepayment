@@ -21,7 +21,7 @@
     <color name="text_primary">#212121</color>
     <color name="text_secondary">#757575</color>
 
-
+    <color name="dark_green">#2E8A0A</color>
     <color name="transparent">#00000000</color>
 
     <color name="bottom_nav_item_text_color">
