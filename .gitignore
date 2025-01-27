@@ -10,6 +10,7 @@ node_modules/
 # Ignore build directories
 dist/
 build/
+.gradle/
 
 # Ignore temporary files
 *.tmp
