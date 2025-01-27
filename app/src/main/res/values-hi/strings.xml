@@ -37,4 +37,6 @@
     <string name="invalid_code">कोड अमान्य है</string>
     <string name="reset_to_new">नया पासवर्ड रीसेट करें</string>
     <string name="code_sent">कोड आपके ईमेल पर सफलतापूर्वक भेज दिया गया</string>
+    <string name="all_fields_needed">कृपया सभी स्थानों को भरें</string>
+    <string name="signup_success">सफल पंजीकरण!</string>
 </resources>

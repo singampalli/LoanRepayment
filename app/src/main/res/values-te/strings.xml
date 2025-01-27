@@ -37,4 +37,6 @@
     <string name="emi_amount">EMI మొత్తం: ₹ %s</string>
     <string name="outstanding_amount">అత్యుత్తమ ప్రిన్సిపాల్: ₹ %s</string>
     <string name="empty_code">కోడ్ ఖాళీగా ఉండకూడదు</string>
+    <string name="all_fields_needed">దయచేసి అన్ని ఫీల్డ్‌లను పూరించండి</string>
+    <string name="signup_success">సైన్ అప్ విజయవంతమైంది!</string>
 </resources>
